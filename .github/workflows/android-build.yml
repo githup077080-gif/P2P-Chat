@@ -160,3 +160,20 @@ jobs:
           name: p2p-chat-2.0.0-release-apk
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
+
+      - name: Create clean project ZIP archive
+        run: |
+          zip -r p2p-chat-2.0.0-complete-project.zip . \
+            -x "*.gradle*" \
+            -x "*/build/*" \
+            -x "app/build/*" \
+            -x ".git/*" \
+            -x ".idea/*" \
+            -x "*.DS_Store"
+
+      - name: Upload Project ZIP artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: p2p-chat-2.0.0-complete-project-zip
+          path: p2p-chat-2.0.0-complete-project.zip
+          if-no-files-found: error
